@@ -1,25 +1,31 @@
 package processor;
 
-public class WordFix {
-    private String origional;
-    private String[] fixes;
+import java.util.ArrayList;
 
-    public WordFix(String origional, String[] fixes) {
+public class WordFix {
+    private Word origional;
+    private ArrayList<Word> fixes = new ArrayList<>();
+
+    public WordFix(Word origional) {
         this.origional = origional;
-        this.fixes = fixes;
     }
+    public void push(Word word) {
+        fixes.add(word);
+    }
+
     @Override
     public String toString() {
-        if(fixes.length == 0) {
-            return origional;
+        if(fixes.size() == 0) {
+            return origional.toString();
         }
+
         StringBuilder builder = new StringBuilder();
         builder.append(origional + " - ");
-        for(int i=0; i<fixes.length; i++) {
+        for(int i=0; i<fixes.size(); i++) {
             if(i != 0) {
                 builder.append(", ");
             }
-            builder.append(fixes[i]);
+            builder.append(fixes.get(i));
         }
         return builder.toString();
     }
